@@ -6,10 +6,8 @@ import { LoginComponent } from './components/account/login/login.component';
 import { RegisterComponent } from './components/account/register/register.component';
 
 export const routes: Routes = [
-  { path: '', component: ExamListComponent },
-  { path: 'add-exam', component: ExamFormComponent },
-  { path: 'edit-exam/:id', component: ExamFormComponent },
-   {
+  // ✅ خلي Account في /account عشان الروابط تبقى واضحة ومنطقية
+  {
     path: 'account',
     component: AccountComponent,
     children: [
@@ -17,6 +15,9 @@ export const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent }
     ]
-  }
-
+  },
+  { path: '', redirectTo: 'account', pathMatch: 'full' },
+  { path: 'examlist', component: ExamListComponent },
+  { path: 'add-exam', component: ExamFormComponent },
+  { path: 'edit-exam/:id', component: ExamFormComponent }
 ];

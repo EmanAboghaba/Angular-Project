@@ -2,7 +2,7 @@
   <h3 class="text-center mb-4">Login</h3>
 
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <!-- Email Field -->
+ 
     <div class="form-floating mb-3">
       <input
         type="email"
@@ -25,7 +25,6 @@
       }
     </div>
 
-    <!-- Password Field -->
     <div class="form-floating mb-4">
       <input
         type="password"
@@ -39,6 +38,17 @@
       @if (loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']) {
         <div class="text-danger mt-1">Password is required</div>
       }
+      @if (loginForm.get('password')?.touched && loginForm.get('password')?.errors) {
+  <div class="text-danger mt-1">
+    @if (loginForm.get('password')?.errors?.['required']) {
+      <div>Password is required</div>
+    }
+    @if (loginForm.get('password')?.errors?.['pattern']) {
+      <div>Password must contain letters and numbers (min 6 characters)</div>
+    }
+  </div>
+}
+
     </div>
 
     <button type="submit" class="btn w-100">Login</button>

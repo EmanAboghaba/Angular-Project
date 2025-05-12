@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Route, Router, RouterLink } from '@angular/router';
 
-// Custom validator to check if password and confirmPassword match
 function passwordMatchValidator(form: FormGroup) {
   const password = form.get('password')?.value;
   const confirmPassword = form.get('confirmPassword')?.value;
@@ -33,22 +32,26 @@ function passwordMatchValidator(form: FormGroup) {
 export class RegisterComponent {
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.registerForm = this.fb.group(
-      {
-        name: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', Validators.required],
-        confirmPassword: ['', Validators.required],
-      },
-      { validators: passwordMatchValidator }
-    );
+  {
+    name: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [
+      Validators.required,
+      Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/)
+    ]],
+    confirmPassword: ['', Validators.required],
+  },
+  { validators: passwordMatchValidator }
+);
+
   }
 
   onSubmit() {
     if (this.registerForm.valid) {
       console.log('Register Data:', this.registerForm.value);
-      // TODO: Send to backend API
+      this.router.navigate(['/examlist']);
     } else {
       this.registerForm.markAllAsTouched();
     }

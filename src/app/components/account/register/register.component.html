@@ -52,6 +52,17 @@
       @if (registerForm.get('password')?.touched && registerForm.get('password')?.errors?.['required']) {
         <div class="text-danger mt-1">Password is required</div>
       }
+      @if (registerForm.get('password')?.touched && registerForm.get('password')?.errors) {
+  <div class="text-danger mt-1">
+    @if (registerForm.get('password')?.errors?.['required']) {
+      <div>Password is required</div>
+    }
+    @if (registerForm.get('password')?.errors?.['pattern']) {
+      <div>Password must contain letters and numbers (min 6 characters)</div>
+    }
+  </div>
+}
+
     </div>
 
     <div class="form-floating mb-4">
