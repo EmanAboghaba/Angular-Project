@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "title": "Angular Basics",
+    "description": "Introduction to Angular",
+    "date": "2025-05-15",
+    "duration": 60,
+    "questions": [
+      {
+        "id": 1,
+        "examId": 1,
+        "text": "What is a component?",
+        "choices": ["Class", "Service", "Directive", "Pipe"],
+        "correctAnswer": "Class"
+      }
+    ]
+  },
+  [
+    {
+      "id": 2,
+      "title": "HTML Basics",
+      "description": "Covers tags and structure",
+      "date": "2025-06-01",
+      "duration": 30
+    },
+    {
+      "id": 3,
+      "title": "Angular Fundamentals",
+      "description": "Covers components, routing",
+      "date": "2025-06-10",
+      "duration": 60
+    }
+  ]
+]
