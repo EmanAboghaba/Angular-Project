@@ -1,0 +1,19 @@
+<div class="container my-5">
+  <div class="row shadow rounded overflow-hidden">
+    <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center hero text-white p-5">
+      <img src="undraw_notebook_8ihb.svg" alt="Exam Portal" class="img-fluid mb-4" style="max-height: 220px;" />
+      <h2 class="mb-3 fw-bold">Welcome to Exam Portal</h2>
+      <p class="text-center mb-4 px-3">
+        Take control of your learning journey. Register or login to access your exams and results.
+      </p>
+      <div>
+        <a routerLink="/account/register" class="btn btn-outline-light me-2 px-4">Sign Up</a>
+        <a routerLink="/account/login" class="btn btn-light text-danger px-4">Login</a>
+      </div>
+    </div>
+
+    <div class="col-lg-6 bg-white p-4 fade-in">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
