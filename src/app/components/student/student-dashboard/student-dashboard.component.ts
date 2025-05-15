@@ -1,0 +1,22 @@
+import { Component } from '@angular/core';
+import { Exam } from '../../../models/exam';
+import { ExamService } from '../../../services/exam.service';
+import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-student-dashboard',
+  standalone: true,
+  imports: [CommonModule, RouterLink],
+  templateUrl: './student-dashboard.component.html',
+  styleUrls: ['./student-dashboard.component.css']
+})
+export class StudentDashboardComponent {
+  exams: Exam[] = [];
+
+  constructor(private examService: ExamService) {}
+
+  ngOnInit() {
+    this.exams = this.examService.getAll();
+  }
+}

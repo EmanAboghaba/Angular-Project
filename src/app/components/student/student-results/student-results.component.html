@@ -1,0 +1,26 @@
+<table *ngIf="results.length > 0" class="table table-bordered mt-3">
+  <thead class="table-dark">
+    <tr>
+      <th>#</th>
+      <th>Exam ID</th>
+      <th>Total</th>
+      <th>Correct</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let result of results; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ result.examId }}</td>
+      <td>{{ result.totalQuestions }}</td>
+      <td>{{ result.correctAnswers }}</td>
+      <td>
+        <span [ngClass]="{
+          'badge bg-danger': result.percentage < 50,
+          'badge bg-warning': result.percentage >= 50 && result.percentage < 75,
+          'badge bg-success': result.percentage >= 75
+        }">{{ result.percentage }}%</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
