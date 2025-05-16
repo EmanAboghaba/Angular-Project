@@ -1,19 +1,23 @@
 <div class="container mt-4">
   <h2 class="text-center mb-4">🎓 Student Dashboard</h2>
 
-  <div *ngIf="exams.length === 0" class="alert alert-info text-center">
-    No exams available.
-  </div>
-
-  <div *ngFor="let exam of exams" class="card mb-4 shadow border-primary">
-    <div class="card-body">
-      <h4 class="card-title text-primary">{{ exam.title }}</h4>
-      <p class="card-text">{{ exam.description }}</p>
-      <p><i class="bi bi-calendar-event"></i> <strong>Date:</strong> {{ exam.date }}</p>
-      <p><i class="bi bi-clock"></i> <strong>Duration:</strong> {{ exam.duration }} minutes</p>
-      <a [routerLink]="['/student/exam', exam.id]" class="btn btn-outline-primary">
-        Start Exam
-      </a>
+  @if (exams.length === 0) {
+    <div class="alert alert-info text-center">
+      No exams available.
     </div>
-  </div>
+  }
+
+  @for (exam of exams; track exam.id) {
+    <div class="card mb-4 shadow border-primary">
+      <div class="card-body">
+        <h4 class="card-title text-primary">{{ exam.title }}</h4>
+        <p class="card-text">{{ exam.description }}</p>
+        <p><i class="bi bi-calendar-event"></i> <strong>Date:</strong> {{ exam.date }}</p>
+        <p><i class="bi bi-clock"></i> <strong>Duration:</strong> {{ exam.duration }} minutes</p>
+        <a [routerLink]="['/student/exam', exam.id]" class="btn btn-outline-primary">
+          Start Exam
+        </a>
+      </div>
+    </div>
+  }
 </div>
