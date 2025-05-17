@@ -1,17 +1,18 @@
-@if(results.length > 0){
-<table class="table table-bordered mt-3">
-  <thead class="table-dark">
-    <tr>
-      <th>#</th>
-      <th>Exam ID</th>
-      <th>Total</th>
-      <th>Correct</th>
-      <th>Score</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (result of results; track result.examId; let i = $index) {
+<div class="container mt-4">
+  <h3 class="text-center mb-4 text-primary">📊 Your Results</h3>
+
+  <table *ngIf="results.length > 0; else noResults" class="table table-hover shadow-sm">
+    <thead class="table-success">
       <tr>
+        <th>#</th>
+        <th>Exam</th>
+        <th>Total</th>
+        <th>Correct</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let result of results; let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{ result.examId }}</td>
         <td>{{ result.totalQuestions }}</td>
@@ -19,12 +20,15 @@
         <td>
           <span [ngClass]="{
             'badge bg-danger': result.percentage < 50,
-            'badge bg-warning': result.percentage >= 50 && result.percentage < 75,
+            'badge bg-warning text-dark': result.percentage >= 50 && result.percentage < 75,
             'badge bg-success': result.percentage >= 75
           }">{{ result.percentage }}%</span>
         </td>
       </tr>
-    }
-  </tbody>
-</table>
-}
+    </tbody>
+  </table>
+
+  <ng-template #noResults>
+    <div class="alert alert-warning text-center">🙁 No results yet.</div>
+  </ng-template>
+</div>

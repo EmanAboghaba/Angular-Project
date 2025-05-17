@@ -1,23 +1,28 @@
 <div class="container mt-4">
-  <h2 class="text-center mb-4">🎓 Student Dashboard</h2>
+  <h2 class="text-center mb-4 fw-bold text-success">📚 Available Skill Exams</h2>
 
   @if (exams.length === 0) {
     <div class="alert alert-info text-center">
-      No exams available.
+      😔 No exams available now. Please check later!
     </div>
   }
 
-  @for (exam of exams; track exam.id) {
-    <div class="card mb-4 shadow border-primary">
-      <div class="card-body">
-        <h4 class="card-title text-primary">{{ exam.title }}</h4>
-        <p class="card-text">{{ exam.description }}</p>
-        <p><i class="bi bi-calendar-event"></i> <strong>Date:</strong> {{ exam.date }}</p>
-        <p><i class="bi bi-clock"></i> <strong>Duration:</strong> {{ exam.duration }} minutes</p>
-        <a [routerLink]="['/student/exam', exam.id]" class="btn btn-outline-primary">
-          Start Exam
-        </a>
+  <div class="row">
+    @for (exam of exams; track exam.id) {
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 shadow border-0 exam-card animate__animated animate__fadeInUp">
+          <div class="card-body">
+            <h4 class="card-title text-primary">{{ exam.title }}</h4>
+            <p class="card-text">{{ exam.description }}</p>
+            <p><i class="bi bi-calendar-event-fill"></i> <strong>Date:</strong> {{ exam.date }}</p>
+            <p><i class="bi bi-clock-fill"></i> <strong>Duration:</strong> {{ exam.duration }} minutes</p>
+          </div>
+          <div class="card-footer bg-transparent border-0 text-center">
+            <a [routerLink]="['/student/exam', exam.id]" class="btn btn-success w-100">🎯 Start Exam</a>
+          </div>
+        </div>
       </div>
-    </div>
-  }
+    }
+  </div>
 </div>
+
