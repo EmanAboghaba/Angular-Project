@@ -1,0 +1,13 @@
+h3 {
+  color: #000039;
+}
+
+button {
+  background-color: #000039;
+  color: white;
+}
+
+button:hover {
+  background-color: #1a1a8f;
+  color: #fff;
+}

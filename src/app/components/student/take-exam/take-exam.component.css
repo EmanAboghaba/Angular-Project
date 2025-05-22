@@ -1,0 +1,169 @@
+body {
+  background-color: #f4f7fb;
+  font-family: 'Comic Neue', cursive, sans-serif;
+}
+
+.container {
+  padding: 1rem;
+}
+
+h2.text-primary {
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #000039;
+}
+
+.alert-info {
+  background-color: #e0e4ff;
+  border: 1px solid #000039;
+  color: #000039;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+}
+
+form {
+  animation-duration: 0.7s;
+}
+
+.border {
+  border: 2px dashed #000039;
+}
+
+.bg-white {
+  background-color: #fdfdff !important;
+}
+
+.question h5 {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #000039;
+}
+.form-check-input {
+  border: 2px solid #000039;
+  cursor: pointer;
+}
+
+.form-check-input:checked {
+  background-color: #000039;
+  border-color: #000039;
+}
+
+.form-check-label {
+  font-size: 1rem;
+  padding-left: 0.5rem;
+  cursor: pointer;
+  color: #000039;
+}
+
+button[type="submit"] {
+  background-color: #000039;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #1a1a70;
+}
+
+.result-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background: linear-gradient(to bottom right, #e6eaff, #f5faff);
+}
+
+.result-card {
+  background: #ffffff;
+  padding: 2.5rem 2rem;
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.icon {
+  font-size: 3.5rem;
+  color: #28a745;
+}
+
+.text-success {
+  color: #000039;
+  font-weight: bold;
+}
+
+.score-circle {
+  background-color: #000039;
+  width: 90px;
+  height: 90px;
+  font-size: 1.6rem;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin: 1rem auto;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn-retake,
+.btn-dark {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-retake {
+  background-color: #000039;
+  color: white;
+}
+
+.btn-retake:hover {
+  background-color: #1a1a70;
+}
+
+.btn-dark {
+  background-color: #444;
+  color: white;
+}
+
+.btn-dark:hover {
+  background-color: #222;
+}
+
+@media (max-width: 576px) {
+  h2.text-primary {
+    font-size: 1.4rem;
+  }
+
+  .score-circle {
+    width: 70px;
+    height: 70px;
+    font-size: 1.3rem;
+  }
+
+  .btn-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

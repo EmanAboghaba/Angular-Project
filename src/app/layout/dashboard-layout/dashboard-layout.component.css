@@ -1,0 +1,61 @@
+
+.dashboard-container {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #000039 !important;
+  transition: transform 0.3s ease;
+  z-index: 1030;
+}
+
+.sidebar.collapsed {
+  transform: translateX(-100%);
+}
+
+.sidebar-mobile {
+  position: fixed;
+  top: 56px;
+  left: 0
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 56px);
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1020;
+  display: none;
+}
+
+.sidebar-overlay.show {
+  display: block;
+}
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.content-area {
+  flex: 1;
+}
+
+app-navbar {
+  z-index: 1050;
+  position: sticky;
+  top: 0;
+  display: block;
+}
+
+app-footer {
+  z-index: 1050;
+  display: block;
+}

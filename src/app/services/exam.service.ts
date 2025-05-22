@@ -2,31 +2,38 @@ import { Injectable } from '@angular/core';
 import { Exam } from '../models/exam';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ExamService {
-  private exams: Exam[] = [];
+  private storageKey = 'exams';
 
   getAll(): Exam[] {
-    return [...this.exams];
+    const data = localStorage.getItem(this.storageKey);
+    return data ? JSON.parse(data) : [];
   }
 
   getById(id: number): Exam | undefined {
-    return this.exams.find((e) => e.id === id);
+    return this.getAll().find(e => e.id === id);
   }
 
-  add(exam: Exam) {
-    this.exams.push({ ...exam, id: Date.now() });
+  add(exam: Exam): void {
+    const exams = this.getAll();
+    exam.id = new Date().getTime(); 
+    exams.push(exam);
+    this.saveAll(exams);
   }
 
-  update(id: number, updatedExam: Exam) {
-    const index = this.exams.findIndex((e) => e.id === id);
-    if (index !== -1) {
-      this.exams[index] = { ...updatedExam, id };
-    }
+  update(id: number, updated: Exam): void {
+    let exams = this.getAll().map(e => (e.id === id ? updated : e));
+    this.saveAll(exams);
   }
 
-  delete(id: number) {
-    this.exams = this.exams.filter((e) => e.id !== id);
+  delete(id: number): void {
+    let exams = this.getAll().filter(e => e.id !== id);
+    this.saveAll(exams);
+  }
+
+  private saveAll(exams: Exam[]) {
+    localStorage.setItem(this.storageKey, JSON.stringify(exams));
   }
 }

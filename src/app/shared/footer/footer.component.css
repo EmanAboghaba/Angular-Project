@@ -1,0 +1,23 @@
+.bg-dark-blue {
+  background-color: #000039 !important;
+}
+
+footer {
+  width: 100%;
+}
+
+footer i {
+  vertical-align: middle;
+  transition: transform 0.2s ease;
+}
+
+footer a:hover i {
+  transform: scale(1.2);
+  color: #4fd1c5 !important;
+}
+
+footer p,
+footer a {
+  margin-bottom: 0.25rem;
+  text-decoration: none;
+}
