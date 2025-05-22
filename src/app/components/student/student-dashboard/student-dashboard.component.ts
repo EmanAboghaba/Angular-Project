@@ -3,8 +3,8 @@ import { Exam } from '../../../models/exam';
 import { ExamService } from '../../../services/exam.service';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from "../navbar/navbar.component";
-import { FooterComponent } from "../footer/footer.component";
+import { NavbarComponent } from "../../../shared/navbar/navbar.component";
+import { FooterComponent } from "../../../shared/footer/footer.component";
 
 @Component({
   selector: 'app-student-dashboard',

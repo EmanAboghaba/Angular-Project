@@ -1,0 +1,22 @@
+.bg-dark-blue {
+  background-color: #000039 !important;
+}
+
+.navbar-brand,
+.nav-link {
+  color: #ffffff !important;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  color: #4fd1c5 !important;
+}
+
+.nav-link:hover {
+  color: #cdd6f4 !important;
+}
+nav.navbar {
+  z-index: 1050; 
+  position: sticky;
+  top: 0;
+}

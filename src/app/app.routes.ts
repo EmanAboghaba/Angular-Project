@@ -7,6 +7,7 @@ import { RegisterComponent } from './components/account/register/register.compon
 import { StudentDashboardComponent } from './components/student/student-dashboard/student-dashboard.component';
 import { StudentResultsComponent } from './components/student/student-results/student-results.component';
 import { TakeExamComponent } from './components/student/take-exam/take-exam.component';
+import { DashboardLayoutComponent } from './layout/dashboard-layout/dashboard-layout.component';
 
 export const routes: Routes = [
   {
@@ -26,11 +27,12 @@ export const routes: Routes = [
 
   {
     path: 'student',
+    component: DashboardLayoutComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard',component:StudentDashboardComponent  },
-      { path: 'exam/:id', component:TakeExamComponent  },
-      { path: 'results',component: StudentResultsComponent}
+      { path: 'dashboard', component: StudentDashboardComponent },
+      { path: 'exam/:id', component: TakeExamComponent },
+      { path: 'results', component: StudentResultsComponent }
     ]
   }
 ];

@@ -22,12 +22,15 @@ export class LoginComponent {
     });
   }
 
-  onSubmit() {
-    if (this.loginForm.valid) {
-      console.log('Submitted', this.loginForm.value);
-      this.router.navigate(['/examlist']);
-    } else {
-      this.loginForm.markAllAsTouched();
-    }
+onSubmit() {
+  if (this.loginForm.valid) {
+    const email = this.loginForm.value.email;
+    localStorage.setItem('studentEmail', email);  // ✅ Save email
+    this.router.navigate(['/student']);
+  } else {
+    this.loginForm.markAllAsTouched();
   }
+}
+
+
 }

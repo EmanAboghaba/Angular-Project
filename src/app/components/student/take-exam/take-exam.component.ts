@@ -17,6 +17,8 @@ export class TakeExamComponent implements OnInit, OnDestroy {
   answers: { [questionId: number]: number } = {};
   timeLeft: number = 0;
   intervalId: any;
+  submitted = false;
+  correctAnswers = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -55,13 +57,14 @@ export class TakeExamComponent implements OnInit, OnDestroy {
 
   submitExam(): void {
     clearInterval(this.intervalId);
-
     let correctCount = 0;
     for (const q of this.exam.questions) {
       if (this.answers[q.id] === q.correctAnswerId) {
         correctCount++;
       }
     }
+
+    this.correctAnswers = correctCount;
 
     const result = {
       examId: this.exam.id,
@@ -74,8 +77,15 @@ export class TakeExamComponent implements OnInit, OnDestroy {
     results.push(result);
     localStorage.setItem('studentResults', JSON.stringify(results));
 
-    alert(`✅ Exam submitted! You scored ${result.correctAnswers}/${result.totalQuestions}`);
-    this.router.navigate(['/student/results']);
+    this.submitted = true;
+  }
+
+  retakeExam(): void {
+    window.location.reload();
+  }
+
+  goToExams(): void {
+    this.router.navigate(['/student']);
   }
 
   get formattedTime(): string {
