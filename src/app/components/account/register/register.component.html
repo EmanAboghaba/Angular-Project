@@ -3,40 +3,77 @@
 
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <div class="form-floating mb-3">
-      <input type="text" id="registerName" class="form-control" placeholder="Full Name" formControlName="name" />
-      <label for="registerName">Full Name</label>
-      <div class="text-danger mt-1" *ngIf="registerForm.get('name')?.touched && registerForm.get('name')?.errors?.['required']">
-        Name is required
-      </div>
+      <input type="text" id="firstName" class="form-control" placeholder="First Name" formControlName="firstName" />
+      <label for="firstName">First Name</label>
+      @if (registerForm.get('firstName')?.touched && registerForm.get('firstName')?.errors?.['required']) {
+        <div class="text-danger mt-1">First name is required</div>
+      }
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="text" id="lastName" class="form-control" placeholder="Last Name" formControlName="lastName" />
+      <label for="lastName">Last Name</label>
+      @if (registerForm.get('lastName')?.touched && registerForm.get('lastName')?.errors?.['required']) {
+        <div class="text-danger mt-1">Last name is required</div>
+      }
     </div>
 
     <div class="form-floating mb-3">
       <input type="email" id="registerEmail" class="form-control" placeholder="name@example.com" formControlName="email" />
       <label for="registerEmail">Email address</label>
-      <div class="text-danger mt-1" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.errors">
-        <div *ngIf="registerForm.get('email')?.errors?.['required']">Email is required</div>
-        <div *ngIf="registerForm.get('email')?.errors?.['email']">Enter a valid email</div>
-      </div>
+      @if (registerForm.get('email')?.touched && registerForm.get('email')?.errors) {
+        <div class="text-danger mt-1">
+          @if (registerForm.get('email')?.errors?.['required']) {
+            <div>Email is required</div>
+          }
+          @if (registerForm.get('email')?.errors?.['email']) {
+            <div>Enter a valid email</div>
+          }
+        </div>
+      }
     </div>
 
     <div class="form-floating mb-3">
       <input type="password" id="registerPassword" class="form-control" placeholder="Password" formControlName="password" />
       <label for="registerPassword">Password</label>
-      <div class="text-danger mt-1" *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors">
-        <div *ngIf="registerForm.get('password')?.errors?.['required']">Password is required</div>
-        <div *ngIf="registerForm.get('password')?.errors?.['pattern']">
-          Password must contain letters and numbers (min 6 characters)
+      @if (registerForm.get('password')?.touched && registerForm.get('password')?.errors) {
+        <div class="text-danger mt-1">
+          @if (registerForm.get('password')?.errors?.['required']) {
+            <div>Password is required</div>
+          }
+          @if (registerForm.get('password')?.errors?.['pattern']) {
+            <div>Password must contain letters and numbers (min 6 characters)</div>
+          }
         </div>
-      </div>
+      }
     </div>
 
     <div class="form-floating mb-4">
       <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password" formControlName="confirmPassword" />
       <label for="confirmPassword">Confirm Password</label>
-      <div class="text-danger mt-1" *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.errors">
-        <div *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Confirm Password is required</div>
-        <div *ngIf="registerForm.get('confirmPassword')?.errors?.['mismatch']">Passwords do not match</div>
-      </div>
+      @if (registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.errors) {
+        <div class="text-danger mt-1">
+          @if (registerForm.get('confirmPassword')?.errors?.['required']) {
+            <div>Confirm Password is required</div>
+          }
+          @if (registerForm.get('confirmPassword')?.errors?.['mismatch']) {
+            <div>Passwords do not match</div>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="form-floating mb-4">
+      <select id="major" class="form-select" formControlName="major">
+        <option value="" disabled selected>Select your track</option>
+        <option value="mern">MERN Track</option>
+        <option value="python">Python Track</option>
+        <option value="dotnet">.NET Track</option>
+      </select>
+      <label for="major">Track</label>
+      @if (registerForm.get('major')?.touched && registerForm.get('major')?.errors?.['required']) {
+        <div class="text-danger mt-1">Track selection is required</div>
+      }
     </div>
 
     <button type="submit" class="btn w-100">Create Account</button>
