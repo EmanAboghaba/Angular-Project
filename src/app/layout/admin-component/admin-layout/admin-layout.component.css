@@ -1,0 +1,10 @@
+.sidebar {
+  display: flex;
+  color: aliceblue;
+  flex-direction: column;
+  width: 250px;
+  min-height: 100vh;
+  background-color: #000039 !important;
+  transition: transform 0.3s ease;
+  z-index: 1030;
+}

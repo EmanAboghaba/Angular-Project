@@ -1,27 +1,39 @@
 <div class="container mt-4">
-   <h2 class="text-center mb-4 fw-bold text-dark-blue">
+  <h2 class="text-center mb-4 fw-bold text-dark-blue">
     <i class="bi bi-journal-code me-2"></i> Available Skill Exams
   </h2>
   @if (exams.length === 0) {
-    <div class="alert alert-warning text-center shadow-sm rounded-3">
-    <i class="bi bi-emoji-frown me-2"></i> No exams available now. Please check later!
-    </div>
+  <div class="alert alert-warning text-center shadow-sm rounded-3">
+    <i class="bi bi-emoji-frown me-2"></i> No exams available now. Please check
+    later!
+  </div>
   }
 
   <div class="row">
     @for (exam of exams; track exam.id) {
-      <div  class="col-md-6 col-lg-4 mb-4">
-          <div class="card h-100 shadow-sm border-0 exam-card animate__animated animate__fadeInUp">
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div
+        class="card h-100 shadow-sm border-0 exam-card animate__animated animate__fadeInUp"
+      >
         <div class="card-body">
           <h4 class="card-title fw-semibold text-dark-blue">
             <i class="bi bi-file-earmark-text me-1"></i> {{ exam.title }}
           </h4>
           <p class="card-text text-muted">{{ exam.description }}</p>
-          <p class="mb-1"><i class="bi bi-calendar-event-fill me-1 text-dark-blue"></i><strong> Date:</strong> {{ exam.date }}</p>
-          <p><i class="bi bi-clock-fill me-1 text-dark-blue"></i><strong> Duration:</strong> {{ exam.duration }} minutes</p>
+          <p class="mb-1">
+            <i class="bi bi-calendar-event-fill me-1 text-dark-blue"></i
+            ><strong> Date:</strong> {{ exam.startDate }}
+          </p>
+          <p>
+            <i class="bi bi-clock-fill me-1 text-dark-blue"></i
+            ><strong> Duration:</strong> {{ exam.duration }} minutes
+          </p>
         </div>
         <div class="card-footer bg-transparent border-0 text-center">
-          <a [routerLink]="['/student/exam', exam.id]" class="btn start-btn w-100">
+          <a
+            [routerLink]="['/student/exam', exam.id]"
+            class="btn start-btn w-100"
+          >
             <i class="bi bi-play-circle me-1"></i> Start Exam
           </a>
         </div>
@@ -30,4 +42,3 @@
     }
   </div>
 </div>
-

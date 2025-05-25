@@ -10,11 +10,11 @@ import { Exam } from '../../../models/exam';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './take-exam.component.html',
-  styleUrls: ['./take-exam.component.css']
+  styleUrls: ['./take-exam.component.css'],
 })
 export class TakeExamComponent implements OnInit, OnDestroy {
   exam!: Exam;
-  answers: { [questionId: number]: number } = {};
+  answers: { [questionId: number]: string } = {};
   timeLeft: number = 0;
   intervalId: any;
   submitted = false;
@@ -29,14 +29,14 @@ export class TakeExamComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('id')!;
     const exam = this.examService.getById(id);
-    if (exam && exam.duration && exam.duration > 0) {
-      this.exam = exam;
-      this.timeLeft = exam.duration * 60;
-      this.startTimer();
-    } else {
-      alert('❌ Exam not found or invalid duration');
-      this.router.navigate(['/student']);
-    }
+    // if (exam && exam.duration && exam.duration > 0) {
+    //   this.exam = exam;
+    //   this.timeLeft = exam.duration * 60;
+    //   this.startTimer();
+    // } else {
+    //   alert('❌ Exam not found or invalid duration');
+    //   this.router.navigate(['/student']);
+    // }
   }
 
   ngOnDestroy(): void {
@@ -58,8 +58,8 @@ export class TakeExamComponent implements OnInit, OnDestroy {
   submitExam(): void {
     clearInterval(this.intervalId);
     let correctCount = 0;
-    for (const q of this.exam.questions) {
-      if (this.answers[q.id] === q.correctAnswerId) {
+    for (const q of this.exam!.questions) {
+      if (this.answers[q.id] === q.correctAnswer) {
         correctCount++;
       }
     }
