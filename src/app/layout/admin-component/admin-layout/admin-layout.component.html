@@ -1,0 +1,38 @@
+<app-navbar></app-navbar>
+
+<div class="admin-layout d-flex">
+  <aside class="sidebar p-3 bg-light border-end" style="width: 250px">
+    <h4>Admin Panel</h4>
+    <ul class="nav flex-column color-weight-600">
+      <li class="nav-item">
+        <a
+          routerLink="/admin/examlist"
+          class="nav-link"
+          routerLinkActive="active"
+          >Exam List</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          routerLink="/admin/add-exam"
+          class="nav-link"
+          routerLinkActive="active"
+          >Add Exam</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          routerLink="/admin/profile"
+          class="nav-link"
+          routerLinkActive="active"
+          >Admin Profile</a
+        >
+      </li>
+    </ul>
+  </aside>
+
+  <main class="p-4 flex-grow-1">
+    <router-outlet></router-outlet>
+  </main>
+</div>
+<app-footer></app-footer>

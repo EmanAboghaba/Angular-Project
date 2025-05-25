@@ -11,6 +11,10 @@
 npm-debug.log
 yarn-error.log
 
+
+# Ignore a specific folder within another folder
+src/app/components/student
+
 # IDEs and editors
 .idea/
 .project

@@ -1,0 +1,135 @@
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  min-height: 400px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #10375e;
+  color: white;
+}
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-lg {
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+}
+
+.exam-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.exam-card {
+  background: white;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  transition: transform 0.2s ease-in-out;
+}
+
+.exam-card:hover {
+  transform: translateY(-3px);
+}
+
+.exam-details {
+  flex-grow: 1;
+}
+
+.exam-title {
+  margin: 0;
+  font-size: 1.6rem;
+  color: #343a40;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.exam-description {
+  margin: 0.5rem 0;
+  color: #6c757d; /* Muted text for description */
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.exam-date,
+.exam-duration {
+  display: block; /* Each on its own line */
+  color: #888;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.exam-actions {
+  display: flex;
+  gap: 0.75rem; /* Space between action buttons */
+  justify-content: flex-end; /* Align buttons to the right */
+  margin-top: 1rem;
+}
+
+.btn-sm {
+  padding: 0.4rem 1rem;
+  font-size: 0.875rem;
+  border-radius: 5px;
+}
+
+.btn-info {
+  background: #17a2b8;
+  color: white;
+}
+.btn-info:hover {
+  background: #138496;
+}
+
+.btn-warning {
+  background: #ffc107;
+  color: #343a40; /* Dark text for warning button */
+}
+.btn-warning:hover {
+  background: #e0a800;
+}
+
+.btn-danger {
+  background: #dc3545;
+  color: white;
+}
+.btn-danger:hover {
+  background: #c82333;
+}
+
+/* No exams message */
+.alert-info {
+  color: #000000;
+  border: 1px solid #bee5eb;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+}

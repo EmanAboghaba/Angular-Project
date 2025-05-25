@@ -3,6 +3,9 @@ import { Exam } from '../../../models/exam';
 import { ExamService } from '../../../services/exam.service';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+
 import { NavbarComponent } from "../../../shared/navbar/navbar.component";
 import { FooterComponent } from "../../../shared/footer/footer.component";
 import { ExamCardComponent } from '../exam-card/exam-card.component';
@@ -10,16 +13,26 @@ import { ExamCardComponent } from '../exam-card/exam-card.component';
 @Component({
   selector: 'app-student-dashboard',
   standalone: true,
+ 
   imports: [ExamCardComponent,CommonModule, RouterLink, NavbarComponent, FooterComponent],
   templateUrl: './student-dashboard.component.html',
-  styleUrls: ['./student-dashboard.component.css']
+  styleUrls: ['./student-dashboard.component.css'],
 })
 export class StudentDashboardComponent implements OnInit {
   exams: Exam[] = [];
 
   constructor(private examService: ExamService) {}
-
+  private examsSubscription: Subscription | undefined;
   ngOnInit(): void {
-    this.exams = this.examService.getAll();
+    this.examsSubscription = this.examService.getAll().subscribe({
+      next: (data: Exam[]) => {
+        this.exams = data;
+        console.log('Exams successfully fetched and displayed:', this.exams);
+      },
+      error: (err: HttpErrorResponse | Error) => {
+        console.error('Error fetching exams for list:', err);
+      },
+    });
+
   }
 }
