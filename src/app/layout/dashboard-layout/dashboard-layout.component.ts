@@ -25,16 +25,24 @@ export class DashboardLayoutComponent {
   isSidebarCollapsed = false;
   isSmallScreen = false;
 
-  @HostListener('window:resize', [])
-  onResize() {
-    this.isSmallScreen = window.innerWidth < 992;
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.checkScreenSize();
   }
 
-  toggleSidebar(): void {
+  ngOnInit() {
+    this.checkScreenSize();
+  }
+
+  checkScreenSize() {
+    this.isSmallScreen = window.innerWidth < 992;
+    if (!this.isSmallScreen) {
+      this.isSidebarCollapsed = false;
+    }
+  }
+
+  toggleSidebar() {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;
   }
-
-  ngOnInit(): void {
-    this.onResize();
-  }
 }
+

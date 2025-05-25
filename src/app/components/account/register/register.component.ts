@@ -1,59 +1,60 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Route, Router, RouterLink } from '@angular/router';
-
-function passwordMatchValidator(form: FormGroup) {
-  const password = form.get('password')?.value;
-  const confirmPassword = form.get('confirmPassword')?.value;
-
-  if (password !== confirmPassword) {
-    form.get('confirmPassword')?.setErrors({ mismatch: true });
-  } else {
-    const errors = form.get('confirmPassword')?.errors;
-    if (errors) {
-      delete errors['mismatch'];
-      if (Object.keys(errors).length === 0) {
-        form.get('confirmPassword')?.setErrors(null);
-      }
-    }
-  }
-
-  return null;
-}
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
   imports: [ReactiveFormsModule, CommonModule, RouterLink],
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.registerForm = this.fb.group(
-  {
-    name: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [
-      Validators.required,
-      Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/)
-    ]],
-    confirmPassword: ['', Validators.required],
-  },
-  { validators: passwordMatchValidator }
-);
-
+      {
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/)]],
+        confirmPassword: ['', Validators.required],
+        major: ['', Validators.required],
+      },
+      { validators: this.passwordMatchValidator }
+    );
   }
 
-  onSubmit() {
+  passwordMatchValidator(group: FormGroup) {
+    const password = group.get('password')?.value;
+    const confirmPassword = group.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { mismatch: true };
+  }
+
+  onSubmit(): void {
     if (this.registerForm.valid) {
-      console.log('Register Data:', this.registerForm.value);
-      this.router.navigate(['/examlist']);
+      const formData = this.registerForm.value;
+      const userData = {
+        name: `${formData.firstName} ${formData.lastName}`,
+        email: formData.email,
+        password: formData.password,
+        major: formData.major,
+        image: null
+      };
+
+      this.authService.registerUser(userData);
+      this.authService.login(userData);
+      this.router.navigate(['/student']);
     } else {
       this.registerForm.markAllAsTouched();
     }
+  
   }
 }

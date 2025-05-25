@@ -1,42 +1,50 @@
-<div class="container mt-4">
-  <h3 class="text-center mb-4 text-primary">
-    <i class="bi bi-bar-chart-line-fill me-2"></i> Your Results
-  </h3>
-
+<div class="results-container">
+  <div class="header">
+    <h2><i class="bi bi-journal-check"></i> Exam Results</h2>
+    <p>View your previous exam attempts and scores</p>
+  </div>
+  
   @if (results.length > 0) {
-    <table class="table table-hover shadow-sm">
-      <thead class="table-success">
-        <tr>
-          <th>#</th>
-          <th><i class="bi bi-journal-text me-1"></i> Exam</th>
-          <th><i class="bi bi-list-ol me-1"></i> Total</th>
-          <th><i class="bi bi-check-circle me-1"></i> Correct</th>
-          <th><i class="bi bi-percent me-1"></i> Score</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (result of results; track result.examId) {
-          <tr>
-            <td>{{ $index + 1 }}</td>
-            <td>{{ result.examId }}</td>
-            <td>{{ result.totalQuestions }}</td>
-            <td>{{ result.correctAnswers }}</td>
-            <td>
-              <span [ngClass]="{
-                'badge bg-danger': result.percentage < 50,
-                'badge bg-warning text-dark': result.percentage >= 50 && result.percentage < 75,
-                'badge bg-success': result.percentage >= 75
-              }">
-                {{ result.percentage }}%
-              </span>
-            </td>
-          </tr>
-        }
-      </tbody>
-    </table>
+    <div class="results-grid">
+      @for (result of results; track $index) {
+        <div class="result-card" [class]="getResultClass(result.score)">
+          <div class="card-header">
+            <h3>{{ result.title }}</h3>
+            <span class="date">{{ result.date | date }}</span>
+          </div>
+          
+          <div class="card-body">
+            <div class="score-circle">
+              {{ result.score }}%
+            </div>
+            
+            <div class="verdict">
+              @if (result.score >= 80) {
+                <i class="bi bi-emoji-smile"></i> Excellent!
+              } @else if (result.score >= 50) {
+                <i class="bi bi-emoji-neutral"></i> Good
+              } @else {
+                <i class="bi bi-emoji-frown"></i> Needs Improvement
+              }
+            </div>
+          </div>
+          
+          <div class="card-footer">
+            <a [routerLink]="['/student/exam', result.examId]" class="retry-btn">
+              <i class="bi bi-arrow-repeat"></i> Retry Exam
+            </a>
+          </div>
+        </div>
+      }
+    </div>
   } @else {
-    <div class="alert alert-warning text-center">
-      <i class="bi bi-emoji-frown me-2"></i> No results yet.
+    <div class="no-results">
+      <i class="bi bi-clipboard-x"></i>
+      <h3>No Results Found</h3>
+      <p>You haven't taken any exams yet</p>
+      <a routerLink="/student/dashboard" class="btn-primary">
+        Browse Exams <i class="bi bi-arrow-right"></i>
+      </a>
     </div>
   }
 </div>

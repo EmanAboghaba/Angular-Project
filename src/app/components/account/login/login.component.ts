@@ -1,36 +1,43 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [
-        Validators.required,
-        Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/) // حروف + أرقام على الأقل 6
-      ]]
+      password: ['', [Validators.required]],
     });
   }
 
-onSubmit() {
-  if (this.loginForm.valid) {
-    const email = this.loginForm.value.email;
-    localStorage.setItem('studentEmail', email);  // ✅ Save email
-    this.router.navigate(['/student']);
-  } else {
-    this.loginForm.markAllAsTouched();
+  onSubmit(): void {
+    if (this.loginForm.valid) {
+      const formEmail = this.loginForm.value.email;
+      const formPassword = this.loginForm.value.password;
+      const user = this.authService.findUserByEmail(formEmail);
+
+      if (user && user.password === formPassword) {
+        this.authService.login(user);
+        this.router.navigate(['/student']);
+      } else {
+        alert('Invalid login. Please check your email and password.');
+      }
+    } else {
+      this.loginForm.markAllAsTouched();
+    }
   }
-}
-
-
 }

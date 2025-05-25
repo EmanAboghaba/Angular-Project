@@ -8,6 +8,8 @@ import { StudentDashboardComponent } from './components/student/student-dashboar
 import { StudentResultsComponent } from './components/student/student-results/student-results.component';
 import { TakeExamComponent } from './components/student/take-exam/take-exam.component';
 import { DashboardLayoutComponent } from './layout/dashboard-layout/dashboard-layout.component';
+import { ProfileComponent } from './components/student/profile/profile.component';
+import { ChangePasswordComponent } from './components/account/change-password/change-password.component';
 
 export const routes: Routes = [
   {
@@ -17,6 +19,8 @@ export const routes: Routes = [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent }
+   , { path: 'change-password', component: ChangePasswordComponent }
+
     ]
   },
   { path: '', redirectTo: 'account', pathMatch: 'full' },
@@ -33,6 +37,8 @@ export const routes: Routes = [
       { path: 'dashboard', component: StudentDashboardComponent },
       { path: 'exam/:id', component: TakeExamComponent },
       { path: 'results', component: StudentResultsComponent }
+     , { path: 'profile', component: ProfileComponent },
+
     ]
   }
 ];
