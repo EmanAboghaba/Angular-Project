@@ -26,7 +26,6 @@ export class ProfileComponent {
       major: [user?.major || '', Validators.required],
     });
 
-    // Disable form by default
     this.profileForm.disable();
   }
 
