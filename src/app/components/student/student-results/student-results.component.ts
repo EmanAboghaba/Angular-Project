@@ -1,22 +1,24 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-student-results',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './student-results.component.html',
   styleUrl: './student-results.component.css'
 })
 export class StudentResultsComponent {
- results: {
-    examId: number;
-    totalQuestions: number;
-    correctAnswers: number;
-    percentage: number;
-  }[] = [];
+  results = this.getResults();
 
-  constructor() {
-    const stored = localStorage.getItem('studentResults');
-    this.results = stored ? JSON.parse(stored) : [];
+  getResults() {
+    const storedResults = localStorage.getItem('examResults');
+    return storedResults ? JSON.parse(storedResults) : [];
+  }
+
+  getResultClass(score: number): string {
+    if (score >= 80) return 'excellent';
+    if (score >= 50) return 'good';
+    return 'poor';
   }
 }

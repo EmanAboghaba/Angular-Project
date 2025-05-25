@@ -1,13 +1,15 @@
-h3 {
-  color: #000039;
+form {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.05);
 }
 
-button {
-  background-color: #000039;
-  color: white;
+label {
+  color: #555;
 }
 
-button:hover {
-  background-color: #1a1a8f;
-  color: #fff;
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(0,0,57,0.25);
 }

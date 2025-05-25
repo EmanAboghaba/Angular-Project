@@ -1,23 +1,26 @@
-<nav class="navbar navbar-expand-lg bg-dark-blue navbar-dark shadow-sm" role="navigation">
+<nav class="navbar">
   <div class="container">
-    <button class="navbar-toggler" type="button" (click)="onToggleClick()" aria-label="Toggle sidebar">
-      <span class="navbar-toggler-icon"></span>
+    <button class="sidebar-toggle" (click)="toggleSidebar.emit()">
+      <i class="bi bi-list"></i>
     </button>
-    <a class="navbar-brand fw-bold d-flex align-items-center gap-2" routerLink="/">
-      <i class="bi bi-mortarboard-fill"></i> Online Exam
+    
+    <a routerLink="/student/dashboard" class="logo">
+      <i class="bi bi-mortarboard"></i>
+      <span>Exam System</span>
     </a>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item d-flex align-items-center text-white me-3" *ngIf="studentEmail">
-          <i class="bi bi-person-circle me-1"></i> {{ studentEmail }}
-        </li>
-        <li class="nav-item" *ngIf="studentEmail">
-          <button class="btn btn-outline-light btn-sm" (click)="onLogOut()">Logout</button>
-        </li>
-        <li class="nav-item" *ngIf="!studentEmail">
-          <a class="nav-link" routerLink="/login">Login</a>
-        </li>
-      </ul>
+    
+    <div class="user-menu">
+      <div class="user-info">
+        <img
+          [src]="userData?.image || defaultImage"
+          alt="User"
+          class="user-avatar"
+        />
+        <span>{{ userData?.email }}</span>
+      </div>
+      <button class="logout-btn" (click)="onLogOut()">
+        <i class="bi bi-box-arrow-right"></i> Logout
+      </button>
     </div>
   </div>
 </nav>
