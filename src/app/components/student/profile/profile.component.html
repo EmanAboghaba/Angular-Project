@@ -20,12 +20,25 @@
     <div class="form-floating mb-3">
       <input
         type="text"
-        id="name"
+        id="firstName"
         class="form-control"
-        placeholder="Full Name"
-        formControlName="name"
+        placeholder="First Name"
+        formControlName="firstName"
+        [disabled]="!isEditMode"
       />
-      <label for="name">Full Name</label>
+      <label for="firstName">First Name</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        id="lastName"
+        class="form-control"
+        placeholder="Last Name"
+        formControlName="lastName"
+        [disabled]="!isEditMode"
+      />
+      <label for="lastName">Last Name</label>
     </div>
 
     <div class="form-floating mb-3">
@@ -35,18 +48,26 @@
         class="form-control"
         placeholder="Email"
         formControlName="email"
+                [disabled]="!isEditMode"
+
       />
       <label for="email">Email</label>
     </div>
-<div class="form-floating mb-3">
-  <select id="major" class="form-select" formControlName="major" [disabled]="!isEditMode">
-    <option value="" disabled>Select your track</option>
-    <option value="mern">MERN Track</option>
-    <option value="python">Python Track</option>
-    <option value="dotnet">.NET Track</option>
-  </select>
-  <label for="major">Track</label>
-</div>
+
+    <div class="form-floating mb-3">
+      <select
+        id="major"
+        class="form-select"
+        formControlName="major"
+        [disabled]="!isEditMode"
+      >
+        <option value="" disabled>Select your track</option>
+        <option value="mern">MERN Track</option>
+        <option value="python">Python Track</option>
+        <option value="dotnet">.NET Track</option>
+      </select>
+      <label for="major">Track</label>
+    </div>
 
     <div class="d-flex justify-content-between">
       <button type="button" class="btn btn-outline-light" (click)="toggleEdit()">

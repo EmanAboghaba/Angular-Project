@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
+
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -10,25 +11,22 @@ import { AuthService } from '../../../services/auth.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
-  defaultImage = 'default-avatar.png';
-  previewImage: string | null = null;
   profileForm: FormGroup;
   isEditMode = false;
+  previewImage: string | ArrayBuffer | null = null;
+  defaultImage = 'default-avatar.png';
 
-  constructor(
-    private fb: FormBuilder,
-    private authService: AuthService
-  ) {
-    const userData = this.authService.getUserData();
-    
-    this.previewImage = userData?.image || this.defaultImage;
-    
-   this.profileForm = this.fb.group({
-  name: [userData?.name || '', Validators.required],
-  email: [userData?.email || '', [Validators.required, Validators.email]],
-  major: [userData?.major || '', Validators.required]
-});
+  constructor(private fb: FormBuilder, private authService: AuthService) {
+    const user = this.authService.getUserData();
 
+    this.profileForm = this.fb.group({
+      firstName: [user?.name?.split(' ')[0] || '', Validators.required],
+      lastName: [user?.name?.split(' ')[1] || '', Validators.required],
+      email: [user?.email || '', [Validators.required, Validators.email]],
+      major: [user?.major || '', Validators.required],
+    });
+
+    // Disable form by default
     this.profileForm.disable();
   }
 
@@ -39,15 +37,13 @@ export class ProfileComponent {
 
   onSubmit() {
     if (this.profileForm.valid) {
-     const userData = {
-  ...this.authService.getUserData(),
-  name: this.profileForm.value.name,
-  email: this.profileForm.value.email,
-  major: this.profileForm.value.major,
-  image: this.previewImage
-};
-
-this.authService.login(userData);
+      const userData = {
+        ...this.authService.getUserData(),
+        name: `${this.profileForm.value.firstName} ${this.profileForm.value.lastName}`,
+        email: this.profileForm.value.email,
+        major: this.profileForm.value.major,
+        image: this.previewImage
+      };
 
       this.authService.login(userData);
       this.toggleEdit();
